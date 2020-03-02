@@ -9,7 +9,7 @@ class User extends Model{
             password_hash:Sequelize.STRING,
             age:Sequelize.INTEGER,
             gender:Sequelize.STRING,
-            studant:Sequelize.BOOLEAN,
+            institution:Sequelize.BOOLEAN,
         },
         {
             sequelize,
@@ -25,6 +25,9 @@ class User extends Model{
     }
     checkPassword(password) {
         return bcrypt.compare(password,this.password_hash);
+    }
+    static associate(models){
+        this.belongsTo(models.File,{foreignKey:'avatar_id'})
     }
 }
 

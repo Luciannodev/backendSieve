@@ -15,14 +15,14 @@ class SessionController{
             return res.status(401).json({error:'password does not match'})
         }
 
-        const {id,name,studant,gender,age} = user
+        const {id,name,institution,gender,age} = user
 
         return res.json({
             user:{
                 id,
                 name,
                 email,
-                studant,
+                institution,
                 gender,
                 age
             },

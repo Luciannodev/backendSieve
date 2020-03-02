@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('schools', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -13,25 +13,21 @@ module.exports = {
         type:Sequelize.STRING,
         allowNull:false,
       },
-      email:{
-        type:Sequelize.STRING,
-        allowNull: false,
-        unique:true
+      limit_age:{
+        type:Sequelize.INTEGER,   
       },
-      age:{
+      choice_gender:{
+        type:Sequelize.STRING,
+      },
+      limit_nota:{
         type:Sequelize.INTEGER,
       },
-      gender:{
-        type:Sequelize.STRING,
-      },
-      password_hash:{
-        type: Sequelize.STRING,
-        allowNull:false
-      },
-      institution:{
-        type: Sequelize.BOOLEAN,
-        defaultValue:false,
-        allowNull:false
+      id_institution:{
+        type: Sequelize.INTEGER,
+        references: {model: 'users',key:'id'},
+        onUpdate:'CASCADE',
+        onDelelte: 'SET NULL',
+        allowNull:true,
       },
       created_at:{
         type:Sequelize.DATE,
@@ -47,7 +43,7 @@ module.exports = {
 
   },
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('users');
+      return queryInterface.dropTable('schools');
   
   }
 };
