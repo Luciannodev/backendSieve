@@ -1,6 +1,17 @@
 import * as Yup from 'yup'
 import User from '../models/User';
+import School from '../models/School';
 class UserController{
+    async index(req,res){
+        const {school} = req.body
+        console.log(school)
+        const {users} = await School.findByPk(school,{include:{association:'users'}})
+        const aprovados = users.sort(function(a,b){
+            return parseInt(a.age) - parseInt(b.age)
+        })
+        return res.json(aprovados)
+
+}    
     async store(req,res){
         const schema = Yup.object().shape({
             name: Yup.string().required(),
@@ -17,12 +28,12 @@ class UserController{
         }
 
         if(!institution&&(!req.body.gender||!req.body.age)){
-            res.status(400).json({erro:'undeclared gender or age'})
+            return res.status(400).json({erro:'undeclared gender or age'})
         }
 
 
         const userExists = await User.findOne({where:{email:req.body.email}})
-
+        console.log(userExists)
         if(userExists){
             return res.status(400).json({error:'User already exists'})
         }

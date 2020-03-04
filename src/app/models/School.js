@@ -4,6 +4,7 @@ class School extends Model{
     static init(sequelize){
         super.init({
             name:Sequelize.STRING,
+            content:Sequelize.STRING,
 
         },
         {
@@ -13,8 +14,8 @@ class School extends Model{
         return this;
     }
     static associate(models){
-        this.belongsToMany(models.User,{foreignKey:'id_studant',through:'school_users', as: 'alunos'})
-        this.belongsTo(models.User,{foreignKey:'id_institution',as: 'instituicao'})
+        this.belongsTo(models.User,{foreignKey:'institution_id',as:'Owner'})
+        this.belongsToMany(models.User,{foreignKey:'school_id',through:'user_schools',as:'users'})
     }
 
 }

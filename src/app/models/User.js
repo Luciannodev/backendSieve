@@ -28,6 +28,8 @@ class User extends Model{
     }
     static associate(models){
         this.belongsTo(models.File,{foreignKey:'avatar_id'})
+        this.hasMany(models.School,{foreignKey:'institution_id',as:'process'})
+        this.belongsToMany(models.School,{foreignKey:'candidate_id',through:'user_schools',as:'schools'})
     }
 }
 

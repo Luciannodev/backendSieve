@@ -15,8 +15,14 @@ routes.post('/users',UserController.store)
 routes.post('/sessions',SessionController.store)
 routes.use(authMiddlewares)
 routes.put('/users',UserController.update)
-routes.post('/files',upload.single('file'),FileController.store)
-routes.post('/school',SchoolController.store)
+routes.get('/users',UserController.index)
 routes.post('/subscription',SubscribeController.store)
+routes.post('/files',upload.single('file'),FileController.store)
+
+routes.post('/school',SchoolController.store)
+routes.get('/school',SchoolController.index)
+
+
+
 
 export default routes;

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('schools', {
+    return queryInterface.createTable('avaliations', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -13,22 +13,9 @@ module.exports = {
         type:Sequelize.STRING,
         allowNull:false,
       },
-      limit_age:{
-        type:Sequelize.INTEGER,   
-      },
-      content:{
-        type:Sequelize.STRING,
-        allowNull:true,
-      },
-      choice_gender:{
-        type:Sequelize.STRING,
-      },
-      limit_nota:{
-        type:Sequelize.INTEGER,
-      },
-      institution_id:{
+      school_id:{
         type: Sequelize.INTEGER,
-        references: {model: 'users',key:'id'},
+        references: {model: 'schools',key:'id'},
         onUpdate:'CASCADE',
         onDelelte: 'SET NULL',
         allowNull:true,
@@ -47,7 +34,7 @@ module.exports = {
 
   },
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('schools');
+      return queryInterface.dropTable('avaliations');
   
   }
 };
