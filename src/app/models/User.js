@@ -27,7 +27,7 @@ class User extends Model{
         return bcrypt.compare(password,this.password_hash);
     }
     static associate(models){
-        this.belongsTo(models.File,{foreignKey:'avatar_id'})
+        this.belongsTo(models.File,{foreignKey:'avatar_id' ,as:'avatar'})
         this.hasMany(models.School,{foreignKey:'institution_id',as:'process'})
         this.belongsToMany(models.School,{foreignKey:'candidate_id',through:'user_schools',as:'schools'})
     }
